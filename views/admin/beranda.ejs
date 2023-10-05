@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head -->
+<%- include('../partials/admin/head.ejs') %>
+    <!-- Head -->
+
+    <body class="bg-white">
+
+        <%- include('../partials/admin/navbar.ejs') %>
+
+            <!-- Sidenav -->
+            <%- include('../partials/admin/sidebar.ejs') %>
+                <!-- Sidenav -->
+    
+    <div class="flex justify-between h-80 w-full px-80 py-10 mt-20">
+        <div class="h-20 w-52 bg-lime-600 rounded text-center font-bold p-2">
+            <h3 >Pesanan</h3>
+            <h1 class="text-2xl"><%= pesanan.length %></h1>
+        </div>
+        <div class="h-20 w-52 bg-lime-600 rounded text-center font-bold p-2">
+            <h3>Konfirmasi Pembayaran</h3>
+            <h1 class="text-2xl"><%= pesananAwaitPayment.length %></h1>
+        </div>
+    </div>
+
+    <h1 class="font-bold text-3xl text-center">Selamat Datang</h1>
+    <p></p>
+    <p></p>
+
+</body>
+<script src="https://cdn.jsdelivr.net/npm/tw-elements/dist/js/tw-elements.umd.min.js"></script>
+
+</html>

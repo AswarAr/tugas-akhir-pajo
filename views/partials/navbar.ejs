@@ -1,0 +1,61 @@
+<P class="my-2 ml-3 font-bold"><i class="fa-brands fa-whatsapp"></i> 0987654321 &nbsp; &nbsp; <i
+        class="fa-regular fa-envelope"></i> citramandiri47@gmail.com</P>
+<nav class="p-5 hadow m bg-slate-400 md:flex md:items-center md:justify-between mb-2">
+    <div class="flex items-center justify-between ">
+        <span class="text-2xl font-[Poppins] cursor-pointer">
+            UD CITRA MANDIRI
+        </span>
+
+        <span class="block mx-2 text-3xl cursor-pointer md:hidden">
+            <ion-icon name="menu" onclick="Menu(this)"></ion-icon>
+        </span>
+    </div>
+
+    <ul
+        class="md:flex md:items-center z-10 md:z-auto md:static absolute bg-white md:bg-slate-400 w-full left-0 md:w-auto md:py-0 py-4 md:pl-0 px-2 md:opacity-100 opacity-0 top-[-400px] transition-all ease-in duration-500">
+        <li class="mx-4 my-6 md:my-0 <% if(aktifMenu === 'Beranda') { %>
+                    mx-2 my-6 px-4 py-3 bg-slate-500 rounded
+                    <% } %>">
+            <a href="/" class="text-xl duration-500 hover:text-zinc-700 ">BERANDA</a>
+        </li>
+
+        <li class="mx-4 my-6 md:my-0 <% if(aktifMenu === 'Keranjang') { %>
+                    mx-2 my-6 px-4 py-3 bg-slate-500 rounded
+                    <% } %>">
+            <a href="/keranjang" class="text-xl duration-500 hover:text-zinc-700 text-center">KERANGJANG</a>
+        </li>
+
+        <li class="mx-4 my-6 md:my-0 <% if(aktifMenu === 'Kategori') { %>
+                    mx-2 my-6 px-4 py-3 bg-slate-500 rounded
+                    <% } %>">
+            <a href="/kategori" class="text-xl text-center duration-500 hover:text-zinc-700">KATEGORI<P
+                    class="text-center">PRODUK</P></a>
+        </li>
+
+        <li class="mx-4 my-6 md:my-0 <% if(aktifMenu === 'Daftar Pesanan') { %>
+                    mx-2 my-6 px-4 py-3 bg-slate-500 rounded
+                    <% } %>">
+            <a href="/daftar-pesanan" class="text-xl text-center duration-500 hover:text-zinc-700"><P
+                class="text-center">DAFTAR</P>
+                PESANAN</P></a>
+        </li>
+
+        <li class="mx-4 my-6 md:my-0 <% if(aktifMenu === 'Konfirmasi Pembayaran') { %>
+                    mx-2 my-6 px-4 py-3 bg-slate-500 rounded
+                    <% } %>">
+            <a href="/upload-bukti-pembayaran" class="text-xl duration-500 text-center">
+                <p class="text-center">KONFIRMASI</p>
+                <p class="text-center">PEMBAYARAN</p>
+            </a>
+        </li>
+
+        <li class="mx-4 my-6 md:my-0 <% if(aktifMenu === 'Riwayat Pesanan') { %>
+                    mx-2 my-6 px-4 py-3 bg-slate-500 rounded
+                    <% } %>">
+            <a href="/riwayat-pesanan" class="text-xl duration-500 hover:text-zinc-700 text-center">
+                <p class="text-center">RIWAYAT</p>
+                <p class="text-center">PESANAN</p>
+            </a>
+        </li>
+    </ul>
+</nav>

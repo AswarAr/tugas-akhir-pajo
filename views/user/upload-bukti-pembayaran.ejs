@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+        integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>konfirmasi pembayaran</title>
+</head>
+
+<body class="bg-white px-2">
+    
+    <%- include('../partials/navbar.ejs') %>
+
+
+    <% if(alert.message !='' ) { %>
+        <%- include('../partials/alert.ejs') %>
+    <% } %>
+
+    <div class="flex">
+        <% for(let i=0; i < pembayaran.length; i++){ %>
+            <div class=" mx-auto">
+                <img class="h-52 w-64" src="<%= pembayaran[i].UrlGambar %>" alt="">
+                <p class="font-semibold text-center">
+                    <%= pembayaran[i].Nama_Pemilik %>
+                </p>
+                <p class="font-semibold text-center">
+                    <%= pembayaran[i].Nomor_Tujuan %>
+                </p>
+            </div>
+            <% } %>
+    </div>
+    
+    <div class="my-20">
+        <h1 class="text-center font-bold text-2xl">Komfirmasi Pembayaran</h1>
+        <form class="mx-auto w-96" action="/upload-bukti-pembayaran/<%= pesanan.id %>" method="post" enctype="multipart/form-data">
+            <h1 class="font-semibold text-center">Upload Bukti Pembayaran</h1>
+            <h1 class="font-semibold text-center">Rp. <%= pesanan.Total %></h1>
+
+            <input type="file" name="buktiPembayaran" class="w-50 ml-12 px-1 mt-5 mb-3 py-1 bg-gray-500 rounded" placeholder="Bukti Pembayaran" required>
+
+                   <p class="text-center bg-lime-600 px-2 mx-auto w-20 my-5 rounded font-semibold text-center h-8 pt-1 mx-auto">
+                    <button type="submit">
+                        Tambah
+                    </button>
+                   </p>
+                </button>
+        </form>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/tw-elements/dist/js/tw-elements.umd.min.js"></script>
+</body>
+
+</html>

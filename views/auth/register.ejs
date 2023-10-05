@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <title>Register</title>
+</head>
+
+<body class="bg-gray-400 p-4">
+
+    <% if(alert.message !='' ) { %>
+        <%- include('../partials/alert.ejs') %>
+    <% } %>
+
+    <form action="/register" method="POST">
+        <div class="h-auto px-10 py-5 mx-auto my-40 rounded-lg w-96">
+            <h1 class="mb-5 font-bold text-center text-4xl">Register</h1>
+            <h1 class="font-semibold">Email</h1>
+            <input type="email" name="email" class="w-full px-2 rounded bg-zinc-600 h-12 mb-3" placeholder="@Email"
+                required>
+            <h1 class="font-semibold">Nama</h1>
+            <input type="text" name="nama" class="w-full px-2 bg-zinc-600 rounded h-12 mb-3" placeholder="@Nama"
+                required>
+            <h1 class="font-semibold">Alamat</h1>
+            <input type="text" name="alamat" class="w-full px-2 bg-zinc-600 rounded h-12 mb-3" placeholder="@Alamat"
+                required>
+            <h1 class="font-semibold">Password</h1>
+            <input type="password" name="password" class="w-full px-2 bg-zinc-600 rounded h-12 mb-3"
+                placeholder="@Password" required>
+            <h1 class="font-semibold">Password</h1>
+            <input type="password" class="w-full px-2 bg-zinc-600 rounded h-12 mb-9"
+                placeholder="@Password" required>
+
+            <button class="w-full px-2 bg-zinc-600 rounded h-12 font-bold hover:font-bold mb-2" type="submit">
+                Daftar
+            </button>
+            <p class="text-center"><a href="/login" class="hover:font-light">Sudah Punya Akun?</a></p>
+        </div>
+    </form>
+    <script src="https://cdn.jsdelivr.net/npm/tw-elements/dist/js/tw-elements.umd.min.js"></script>
+</body>
+
+</html>

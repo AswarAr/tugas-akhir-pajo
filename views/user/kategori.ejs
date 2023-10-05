@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" />
+    <title>Beranda</title>
+</head>
+
+<body class="bg-white px-2">
+    
+    <%- include('../partials/navbar.ejs') %>
+
+    <div class="flex flex-row mt-20 px-20">
+        
+        <% for(let i=0; i < kategoris.length; i++){ %>
+            <div class="basis-1/3 p-5">
+                <div class="h-96">
+                    <img class="w-full h-full" src="<%= kategoris[i].UrlGambar %>" alt="">
+                </div>
+                <h2 class="font-bold text-xl text-center mb-5">
+                    <%= kategoris[i].Nama_Kategori %>
+                </h2>
+                <a class="text-center" href="/<%= kategoris[i].id %>/produk">
+                    <p>Klik di sini untuk melanjutkan berbelanja <%= kategoris[i].Nama_Kategori %>
+                    </p>
+                </a>
+            </div>
+            <% } %>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/tw-elements/dist/js/tw-elements.umd.min.js"></script>
+    
+</body>
+
+</html>

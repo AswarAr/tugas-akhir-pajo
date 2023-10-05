@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+        integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>konfirmasi pembayaran</title>
+</head>
+
+<body class="bg-white px-2">
+
+    <%- include('../partials/navbar.ejs') %>
+
+        <div class="flex flex-col mt-10">
+            <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
+                <div class="inline-block min-w-full py-2 sm:px-6 lg:px-8">
+                    <div class="overflow-hidden">
+                        <table class="min-w-full border text-center text-sm font-light dark:border-black">
+                            <thead class="border-b font-medium dark:border-black">
+                                <tr class="bg-black text-white">
+                                    <th scope="col" class="border-r dark:border-black">
+                                        No
+                                    </th>
+                                    <th scope="col" class="border-r dark:border-black">
+                                        Gambar Produk
+                                    </th>
+                                    <th scope="col" class="border-r dark:border-black">
+                                        Nama Produk
+                                    </th>
+                                    <th scope="col" class="border-r px-6 py-4 dark:border-black">
+                                        Harga
+                                    </th>
+                                    <th scope="col" class="border-r dark:border-black">
+                                        Jumlah
+                                    </th>
+                                    <th scope="col" class="border-r dark:border-black">
+                                        Total Harga
+                                    </th>
+                                    <th scope="col" class="border-r dark:border-black">
+                                        Total Tagihan
+                                    </th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% for(let i=0; i < pesanan.length; i++){ %>
+                                    <% for(let j=0; j < pesanan[i].Pembeli_Produk_Pesanans.length; j++){ %>
+                                    <tr class="border-b dark:bg-gray-600">
+                                        <% if( j===0 ) { %>
+                                        <td rowspan="<%= pesanan[i].Pembeli_Produk_Pesanans.length %>" class="whitespace-nowrap border-r border-b font-bold dark:border-black">
+                                            <%= i+1 %>
+                                        </td>
+                                        <% } %>
+                                        <td
+                                            class="whitespace-nowrap border-r border-b dark:border-black p-auto max-h-xs">
+                                            <img class="w-52 h-52 mx-auto my-1" src="<%= pesanan[i].Pembeli_Produk_Pesanans[j].Produk.UrlProduk %>" alt="">
+                                        </td>
+                                        <td class="whitespace-nowrap border-r border-b dark:border-black">
+                                            <h3 class="font-bold text-center text-lg">
+                                                <%= pesanan[i].Pembeli_Produk_Pesanans[j].Produk.Nama_Produk %>
+                                            </h3>
+                                        </td>
+                                        <td class="border-r border-b px-6 py-4 dark:border-black ">
+                                            <h3 class="font-bold text-center text-lg">
+                                                <%= pesanan[i].Pembeli_Produk_Pesanans[j].Produk.Harga_Produk %>
+                                            </h3>
+                                        </td>
+                                        <td class="whitespace-nowrap border-r border-b px-6 py-4 dark:border-black">
+                                            <h3 class="font-bold text-center text-lg">
+                                                <%= pesanan[i].Pembeli_Produk_Pesanans[j].Jumlah %>
+                                            </h3>
+                                        </td>
+                                        <% if( j===0 ) { %>
+                                            <td rowspan="<%= pesanan[i].Pembeli_Produk_Pesanans.length %>"
+                                                class="whitespace-nowrap border-r border-b py-4 max-w-xs dark:border-black">
+                                                <h3 class="font-bold text-center text-lg">
+                                                    <%= pesanan[i].Status %>
+                                                </h3>
+                                            </td>
+                                            <% } %>
+                                        <% if( j===0 ) { %>
+                                            <td rowspan="<%= pesanan[i].Pembeli_Produk_Pesanans.length %>"
+                                                class="whitespace-nowrap border-r border-b py-4 max-w-xs dark:border-black">
+                                                <h3 class="font-bold text-center text-lg">
+                                                    Rp. <%= pesanan[i].Total %>
+                                                </h3>
+                                            </td>
+                                            <% } %>
+                                    </tr>
+                                    <% } %>
+                                    <% } %>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <h1 class="text-center font-bold text-xl mt-10">Terima Kasih Telah Berbelanja Di</h1>
+        <h1 class="text-center font-bold text-2xl mb-5">UD CITRA MANDIRI</h1>
+
+        <script src="https://cdn.jsdelivr.net/npm/tw-elements/dist/js/tw-elements.umd.min.js"></script>
+        
+</body>
+
+</html>

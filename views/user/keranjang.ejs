@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+        integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Kerangjang</title>
+</head>
+
+<body class="bg-white px-2">
+    
+    <%- include('../partials/navbar.ejs') %>
+
+    <div class="flex flex-col mt-10">
+        <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
+            <div class="inline-block min-w-full py-2 sm:px-6 lg:px-8">
+                <div class="overflow-hidden">
+                    <table class="min-w-full border text-center text-sm font-light dark:border-black">
+                        <thead class="border-b font-medium dark:border-black">
+                            <tr class="bg-black text-white">
+                                <th scope="col" class="border-r dark:border-black">
+                                    No
+                                </th>
+                                <th scope="col" class="border-r dark:border-black">
+                                    Gambar Produk
+                                </th>
+                                <th scope="col" class="border-r dark:border-black">
+                                    Nama Produk
+                                </th>
+                                <th scope="col" class="border-r px-6 py-4 dark:border-black">
+                                    Harga
+                                </th>
+                                <th scope="col" class="border-r dark:border-black">
+                                    Jumlah
+                                </th>
+                                <th scope="col" class="border-r dark:border-black">
+                                    Total Harga
+                                </th>
+                                <th scope="col" class="border-r dark:border-black">
+                                    Mengubah
+                                </th>
+                               
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% for(let i=0; i < keranjang.length; i++){ %>
+                            <tr class="border-b dark:bg-gray-600">
+                                <td class="whitespace-nowrap border-r border-b font-bold dark:border-black">
+                                    <%= i+1 %>
+                                </td>
+                                <td class="whitespace-nowrap border-r border-b dark:border-black p-auto max-h-xs">
+                                    <img class="w-44 h-44 mx-auto" src=" <%= keranjang[i].Produk.UrlProduk %>" alt="">
+                                </td>
+                                <td class="whitespace-nowrap border-r border-b dark:border-black">
+                                    <h3 class="font-bold text-center text-lg">
+                                        <%= keranjang[i].Produk.Nama_Produk %>
+                                    </h3>
+                                </td>
+                                <td class="border-r border-b px-6 py-4 dark:border-black ">
+                                    <h3 class="font-bold text-center text-lg">
+                                        <%= keranjang[i].Produk.Harga_Produk %>
+                                    </h3>
+                                </td>
+                                <td class="whitespace-nowrap border-r border-b px-6 py-4 dark:border-black">
+                                    <h3 class="font-bold text-center text-lg">
+                                        <%= keranjang[i].Jumlah %>
+                                    </h3>
+                                </td>
+                                <td class="whitespace-nowrap border-r border-b py-4 max-w-xs dark:border-black">
+                                    <h3 class="font-bold text-center text-lg">Rp. <%= keranjang[i].Total_Harga %></h3>
+                                </td>
+                                <td class="whitespace-nowrap border-r border-b py-4 max-w-xs dark:border-black">
+                                    <div class="mx-auto flex flex-col text-black text-center px-auto">
+                                        <a class="my-1" href="/tambah/<%= keranjang[i].Produk_Id %>/pada-keranjang">
+                                            <button class="bg-white rounded font-bold w-20 h-7 text-center" type="button">
+                                                Tambah
+                                            </button></a>
+                                        <a class="my-1" href="/hapus/<%= keranjang[i].Produk_Id %>/keranjang">
+                                            <button class="bg-white rounded font-bold w-20 h-7 text-center" type="button">
+                                                Hapus
+                                            </button></a>
+                                    </div>
+                                </td>
+                            </tr> 
+                            <% } %>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="flex justify-between my-10 absolute right-0 mx-10 h-8">
+        <p class="bg-gray-600 px-2 h-full  mx-1 font-semibold text-center rounded pt-1">
+            <a href="/kategori"><i class="fa-solid fa-circle-arrow-left"></i>&nbsp; Kembali berbelanja</a></p>
+        <p class="bg-gray-600 px-2 rounded mx-1 font-semibold h-full pt-1">
+            <a href="/komfirmasi-pembayaran"> Checkout &nbsp; <i class="fa-solid fa-circle-arrow-right"></i></a></p>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/tw-elements/dist/js/tw-elements.umd.min.js"></script>
+    
+</body>
+
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head -->
+<%- include('../../partials/admin/head.ejs') %>
+<!-- Head -->
+
+<body class="bg-white">
+
+    <%- include('../../partials/admin/navbar.ejs') %>
+
+    <!-- Sidenav -->
+    <%- include('../../partials/admin/sidebar.ejs') %>
+    <!-- Sidenav -->
+
+    <h1 class="font-bold text-3xl text-center my-3">Daftar Produk</h1>
+    
+    <form action="/admin/tambah-produk" method="post" enctype="multipart/form-data">
+        <div class="h-auto px-10 pt-5 mx-auto rounded-lg bg-slate-500 w-1/2">
+            <h1 class="mb-7 font-bold text-center ">Tambah Produk</h1>
+
+            <label for="block" class="font-semibold">Kategori Produk</label>
+            <select name="kategoriId" id="" class="w-full px-1 py-1 my-1 bg-gray-300 rounded">
+                <% for(let i= 0; i < kategori.length; i++){ %>
+                    <option value="<%= kategori[i].id %>">
+                        <%= kategori[i].Nama_Kategori %>
+                    </option>
+                    <% } %>
+            </select>
+
+            <h1 class="font-semibold mt-3">Nama Produk</h1>
+            <input type="text" name="nama" placeholder="Dedak" class="w-full px-1 py-2 my-1 bg-gray-300 rounded" required>
+    
+            <h1 class="font-semibold mt-3">Stok Produk</h1>
+            <input type="text" name="stok" placeholder="200" class="w-full px-1 py-2 my-1  rounded" required>
+    
+            <h1 class="font-semibold mt-3">Harga</h1>
+            <input type="text" name="harga" placeholder="300000" class="w-full px-1 py-2 my-1 bg-gray-300 rounded" required>
+
+            <h1 class="font-semibold mt-3">Deskripsi</h1>
+            <textarea name="deskripsi" id="" cols="30" rows="3" placeholder="Deskripsi" class="w-full px-1 py-2 my-1 bg-gray-300 rounded"></textarea>
+    
+            <h1 class="font-semibold mt-3 mb-1">Gambar Produk</h1>
+            <input type="file" name="gambarProduk" class="w-full px-1 py-2 my-1 bg-gray-300 rounded" placeholder="ucudvdd"
+                required>
+    
+            <button
+                class="w-20 mx-80 my-5 font-semibold bg-blue-600 rounded h-7 text-cyan-50 hover:bg-blue-700 hover:font-bold"
+                type="submit">Tambah</button>
+        </div>
+    </form>
+
+</body>
+<script src="https://cdn.jsdelivr.net/npm/tw-elements/dist/js/tw-elements.umd.min.js"></script>
+<script src="js/myscript.js"></script>
+
+</html>

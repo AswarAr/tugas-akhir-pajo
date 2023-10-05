@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head -->
+<%- include('../../partials/admin/head.ejs') %>
+<!-- Head -->
+
+<body class="bg-white">
+
+    <%- include('../../partials/admin/navbar.ejs') %>
+
+    <!-- Sidenav -->
+    <%- include('../../partials/admin/sidebar.ejs') %>
+    <!-- Sidenav -->
+
+    <h1 class="font-bold text-3xl text-center my-10">Daftar Kategori</h1>
+    
+    <form action="/admin/tambah-kategori" method="post" enctype="multipart/form-data">
+        <div class="h-auto px-10 pt-5 mx-auto rounded-lg bg-slate-500 w-96">
+            <h1 class="mb-7 font-bold text-center ">Tambah Kategori Produk</h1>
+    
+            <h1 class="font-semibold mt-3 mb-1">Nama Kategori</h1>
+            <input type="text" name="nama" placeholder="Pakan Sapi" class="w-full px-1 py-2 bg-gray-300 rounded" required>
+    
+            <h1 class="font-semibold mt-3 mb-1">Poto Kategori</h1>
+            <input type="file" name="gambarKategori" class="w-full px-1 py-2 bg-gray-300 rounded" placeholder="ucudvdd"
+                required>
+            <button
+                class="w-20 mx-28 my-5 font-semibold bg-blue-600 rounded h-7 text-cyan-50 hover:bg-blue-700 hover:font-bold"
+                type="submit">Tambah</button>
+        </div>
+    </form>
+
+</body>
+<script src="https://cdn.jsdelivr.net/npm/tw-elements/dist/js/tw-elements.umd.min.js"></script>
+<script src="js/myscript.js"></script>
+
+</html>
