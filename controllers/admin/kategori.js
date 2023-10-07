@@ -11,12 +11,15 @@ class KategoriController {
                     {model: Produk}
                 ]
             })
+
             const alertMessage = req.flash('alertMessage')
             const alertStatus = req.flash('alertStatus')
             const alert = { message: alertMessage, status: alertStatus }
+
             res.render('admin/kelola-toko/kategori', {
                 kategori,
                 alert,
+                title: 'Daftar Kategori',
             })
         } catch (err) {
             console.log(err)
@@ -27,17 +30,21 @@ class KategoriController {
     }
 
     static async viewAddKategori (req, res) {
-        res.render('admin/kelola-toko/tambah-kategori')
+        res.render('admin/kelola-toko/tambah-kategori',{
+            title: 'Tambah Produk',
+        })
     }
 
     static async actiondAddKategori (req, res) {
         try {
             const {nama} = req.body
             const urlGambar = await saveImage(req.files[0])
+            
             await Kategori.create({
                 Nama_Kategori: nama,
                 UrlGambar: urlGambar
             })
+
             req.flash('alertMessage', 'Kategori Berhasil Ditambahkan')
             req.flash('alertStatus', 'success')
             return res.redirect('/admin/daftar-kategori')
@@ -52,6 +59,7 @@ class KategoriController {
     static async viewUpdateKategori (req, res) {
         try {
             const {kategoriId} = req.params
+
             const kategori = await Kategori.findOne(
                 {
                     where: {
@@ -59,13 +67,16 @@ class KategoriController {
                         isDelete: false
                     }
                 })
+
             if(!kategori) {
                 req.flash('alertMessage', 'Kategori Tidak Ditemukan!')
                 req.flash('alertStatus', 'fail')
                 return res.redirect('/admin/daftar-kategori')
             }
+
             res.render('admin/kelola-toko/perbarui-kategori', {
-                kategori
+                kategori,
+                title: 'Perbarui Produk',
             })
         } catch (err) {
             console.log(err)
@@ -79,9 +90,11 @@ class KategoriController {
         try {
             const {nama} = req.body
             const {kategoriId} = req.params
+
             const {UrlGambar} = await Kategori.findByPk(kategoriId)
             const image = req.files[0]
             let payload
+
             if(!image) {
                 payload = {
                     Nama_Kategori: nama,
@@ -99,6 +112,7 @@ class KategoriController {
                     id: kategoriId, 
                     isDelete: false,
                 }})
+
             req.flash('alertMessage', 'Kategori Berhasil Perbarui')
             req.flash('alertStatus', 'success')
             return res.redirect('/admin/daftar-kategori')
@@ -113,13 +127,17 @@ class KategoriController {
     static async deleteKategori (req, res) {
         try {
             const {kategoriId} = req.params
+
             const validateKategori = await Kategori.findOne({where: {id: kategoriId}})
+
             if(!validateKategori) {
                 req.flash('alertMessage', 'Kategori Tidak Ditemukan!')
                 req.flash('alertStatus', 'fail')
                 return res.redirect('/admin/daftar-kategori')
             }
+
             await Kategori.update({isDelete : true}, {where: {id: kategoriId}})
+            
             req.flash('alertMessage', 'Berhasil Menghapus Kategori')
             req.flash('alertStatus', 'success')
             return res.redirect('/admin/daftar-kategori')

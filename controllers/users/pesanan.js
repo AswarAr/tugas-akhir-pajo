@@ -4,9 +4,9 @@ const {saveImage} = require('../../helper/firebase')
 
 let date = new Date();
 let dateString = date.getDate()  + "-" + (date.getMonth()+1) + "-" + date.getFullYear()
+let login = true
 
 class PesananController {
-
     static async viewPesanan (req, res) {
         const {id: userId} = req.session.user
         try {
@@ -30,15 +30,19 @@ class PesananController {
                         return res.redirect('/keranjang')
                     }
                 }
+            if(req.session.user == null | req.session.user == undefined) login = false
             return res.render('user/konfirmasi-pembayaran', {
                 keranjang: validatekeranjang,
                 totalHarga: totalPesanan,
+                title: 'Daftar Pesanan',
                 aktifMenu: 'Konfirmasi Pembayaran',
+                isLogin: login
             })
         } catch (err) {
             console.log(err)
             req.flash('alertMessage', err.message)
             req.flash('alertStatus', 'danger')
+            return res.redirect('/')
         }
     }
     static async postPesanan (req, res) {
@@ -97,6 +101,7 @@ class PesananController {
             console.log(err)
             req.flash('alertMessage', err.message)
             req.flash('alertStatus', 'danger')
+            return res.redirect('/')
         }
     }
 
@@ -106,23 +111,27 @@ class PesananController {
             const pesanan = await Pesanan.findOne({where: {Pembeli_Id: userId, Status: 'Menunggu Pembayaran'}})
             const pembayaran = await Pembayaran.findAll()
             if(!pesanan){
-                req.flash('alertMessage', 'Pesanan Tidak Ditemukan')
+                req.flash('alertMessage', 'Pesanan Tidak Ditemukan Silahkan Melakukan Pesanan')
                 req.flash('alertStatus', 'danger')
-                return res.redirect('/keranjang')
+                return res.redirect('/kategori')
             }
             const alertMessage = req.flash('alertMessage')
             const alertStatus = req.flash('alertStatus')
             const alert = { message: alertMessage, status: alertStatus }
+            if(req.session.user == null | req.session.user == undefined) login = false
             return res.render('user/upload-bukti-pembayaran', {
                 pesanan,
                 pembayaran,
                 alert,
+                title: 'Upload Bukti Pembayaran',
                 aktifMenu: 'Konfirmasi Pembayaran',
+                isLogin: login
             })
         }catch (err) {
             console.log(err)
             req.flash('alertMessage', err.message)
             req.flash('alertStatus', 'danger')
+            return res.redirect('/')
         }
     }
 
@@ -157,6 +166,7 @@ class PesananController {
             console.log(err)
             req.flash('alertMessage', err.message)
             req.flash('alertStatus', 'danger')
+            return res.redirect('/')
         }
     }
 
@@ -173,9 +183,12 @@ class PesananController {
                         model: Pembeli_Produk_Pesanan,
                     include: Produk}
                 ]})
-        return res.render('user/riwayat-pemesanan', {
+            if(req.session.user == null | req.session.user == undefined) login = false
+            return res.render('user/riwayat-pemesanan', {
             pesanan,
+            title: 'Riwayat Pesanan',
             aktifMenu: 'Riwayat Pesanan',
+            isLogin: login
         })
         }catch (err) {
             console.log(err)
@@ -198,10 +211,12 @@ class PesananController {
                     model: Pembeli_Produk_Pesanan,
                     include: Produk}
                 ]})
-        console.log(pesanan)
-        return res.render('user/daftar-pesanan', {
+            if(req.session.user == null | req.session.user == undefined) login = false
+            return res.render('user/daftar-pesanan', {
             pesanan,
-            aktifMenu: 'Daftar Pesanan'
+            title: 'Daftar Pesanan',
+            aktifMenu: 'Daftar Pesanan',
+            isLogin: login
         })
         }catch (err) {
             console.log(err)

@@ -57,5 +57,12 @@
                 <p class="text-center">PESANAN</p>
             </a>
         </li>
+        <% if(isLogin === true ) { %>
+        <li class="mx-4 my-6 md:my-0">
+            <a href="/logout" class="text-xl duration-500 hover:text-zinc-700 text-center">
+                <p class="text-center">KELUAR</p>
+            </a>
+        </li>
+        <% } %>
     </ul>
 </nav>

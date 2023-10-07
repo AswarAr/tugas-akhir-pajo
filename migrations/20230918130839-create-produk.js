@@ -19,7 +19,7 @@ module.exports = {
         type: Sequelize.STRING
       },
       Deksripsi_Produk: {
-        type: Sequelize.STRING
+        type: Sequelize.TEXT
       },
       Stok_Produk: {
         type: Sequelize.INTEGER

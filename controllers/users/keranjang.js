@@ -6,16 +6,19 @@ class KeranjangController {
     static async viewProduk(req, res) {
         const {id: userId} = req.session.user
         try {
+            let login = true
             const keranjang = await Keranjang.findAll({
                 where: {Pembeli_Id: userId},
                 order: [['id', 'ASC']],
                 include: [
                     {model: Produk}
                 ]})
+            if(req.session.user == null | req.session.user == undefined) login = false
             res.render('user/keranjang', {
                 keranjang,
-                title: 'Produk',
+                title: 'Keranjang',
                 aktifMenu: 'Keranjang',
+                isLogin: login,
             })
         } catch(err){
             console.log(err)
@@ -43,6 +46,9 @@ class KeranjangController {
             res.redirect('/keranjang')
         }catch (err) {
             console.log(err)
+            req.flash('alertMessage', err.message)
+            req.flash('alertStatus', 'danger')
+            return res.redirect('/')
         }
     }
     static async tambahProduk(req, res) {
@@ -74,6 +80,9 @@ class KeranjangController {
             res.redirect(`/${produk.Kategori_Id}/produk`)
         }catch (err) {
             console.log(err)
+            req.flash('alertMessage', err.message)
+            req.flash('alertStatus', 'danger')
+            return res.redirect('/')
         }
     }
 
@@ -94,7 +103,10 @@ class KeranjangController {
             })
             res.redirect('/keranjang')
         }catch(err) {
-            console.log(err)
+           console.log(err)
+            req.flash('alertMessage', err.message)
+            req.flash('alertStatus', 'danger')
+            return res.redirect('/')
         }
     }
 }

@@ -10,10 +10,13 @@ class AuthController {
                 const alertMessage = req.flash('alertMessage')
                 const alertStatus = req.flash('alertStatus')
                 const alert = { message: alertMessage, status: alertStatus }
-                res.render('auth/login', {alert})
+                res.render('auth/login', {
+                    alert,
+                    title: 'Login',
+                })
              }
              else if (req.session.user.adminAuth){
-                res.redirect('/admin/home')
+                res.redirect('/admin/')
             } else {
                 res.redirect('/')
             }
@@ -75,7 +78,8 @@ class AuthController {
                 const alertStatus = req.flash('alertStatus')
                 const alert = { message: alertMessage, status: alertStatus }
                 res.render('auth/register', {
-                    alert
+                    alert,
+                    title: 'Register',
                 })
             } else {
                 res.redirect('/')
@@ -114,8 +118,12 @@ class AuthController {
     }
 
     static async beranda (req, res) {
+        let login = true
+        if(req.session.user == null | req.session.user == undefined) login = false
          res.render('user/beranda', {
             aktifMenu: 'Beranda',
+            title: 'Beranda',
+            isLogin: login
          })
     }
 

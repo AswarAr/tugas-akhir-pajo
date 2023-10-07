@@ -1,17 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <script src="https://cdn.tailwindcss.com"></script>
-        <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-        <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
-            integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
-            crossorigin="anonymous" referrerpolicy="no-referrer" />
-        <link rel="stylesheet" href="style.css">
-        <title>Beranda</title>
-</head>
+
+<%- include('../partials/head.ejs') %>
+
 <body class="bg-white px-2">
     
     <%- include('../partials/navbar.ejs') %>
@@ -26,29 +17,30 @@
     <div class="flex flex-row mx-24 mb-14">
         <div class="p-5">
            <div class="border-x-4 border-black ">
-            <p class="text-center basis-10 mx-5">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                incididunt ut labore et dolore magna
-                aliqua.</p>
+            <p class="text-center basis-10 mx-5">"Saya sudah order berulang kali di layanan web ini, tidak pernah ada kecewa, apalagi support yang sangat cepat dan
+            ramah"</p>
            </div>
             <h3 class="text-center font-bold mt-3">Rahmat</h3>
-            <p class="text-center">Pengusaha Sapi</p>
+            <p class="text-center">Pengusaha Sapi Bibit</p>
         </div>
         <div class="p-5">
-            <p class="text-center">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                labore et dolore magna
-                aliqua.</p>
-            <h3 class="text-center font-bold  mt-3">Rahmat</h3>
-            <p class="text-center">Pengusaha Sapi</p>
+            <p class="text-center">"Pakan ternak yang Saya beli dari UD
+            CITRA MANDIRI sesuai foto dan deskripsi yang tertera. Toko ini akan jadi calon langganan Saya".</p>
+            <h3 class="text-center font-bold  mt-3">Adam Rifaldy</h3>
+            <p class="text-center">Pengusaha ayam peteluri</p>
         </div>
         <div class="p-5">
             <div class="border-x-4 border-black ">
-                <p class="text-center basis-10 mx-5">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                    incididunt ut labore et dolore magna
-                    aliqua.</p>
+                <p class="text-center basis-10 mx-5">"Produknya bagus banget, sangat worth dengan harganya. Hanya saja kelemahannya pengirimannya agak lama. Tapi tidak
+                masalah, karena itu bukan kesalahan dari pihak kakak".</p>
             </div>
-            <h3 class="text-center font-bold  mt-3">Rahmat</h3>
-            <p class="text-center">Pengusaha Sapi</p>
+            <h3 class="text-center font-bold  mt-3">Sultan Nur Salim</h3>
+            <p class="text-center">Pengusaha ayam boiler</p>
         </div>
+    </div>
+
+    <div class="text-xl text-center h-10 bg-slate-400 p-2 font-semibold">
+        <p>Jl. Beloparang, Bonto Lebang, Kec. Bissappu, Kabupaten Bantaeng, Sulawesi Selatan 92451</p>
     </div>
 </body>
 </html>

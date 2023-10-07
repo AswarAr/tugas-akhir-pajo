@@ -1,19 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" />
-    <title>Beranda</title>
-</head>
+<%- include('../partials/head.ejs') %>
 
 <body class="bg-white px-2">
     
     <%- include('../partials/navbar.ejs') %>
+
+    <% if(alert.message !='' ) { %>
+        <%- include('../partials/alert.ejs') %>
+            <% } %>
 
     <div class="flex flex-row mt-20 px-20">
         
@@ -34,7 +30,6 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/tw-elements/dist/js/tw-elements.umd.min.js"></script>
-    
 </body>
 
 </html>
