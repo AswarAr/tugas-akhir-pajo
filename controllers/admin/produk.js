@@ -132,7 +132,8 @@ class ProdukController {
                     Nama_Produk: nama,
                     Stok_Produk: stok,
                     Kategori_Id: kategoriId,
-                    Deksripsi_Produk: deksripsi,
+                    Deksripsi_Produk: deskripsi,
+                    
                     Harga_Produk: harga,
                     UrlProduk: urlGambar,
                 }

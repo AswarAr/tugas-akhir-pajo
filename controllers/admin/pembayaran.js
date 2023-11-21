@@ -105,6 +105,10 @@ class PembayaranController {
                 }
             }
 
+            await Pembayaran.update(payload, 
+                {where: {
+                    id: pembayaranId, 
+                }})
             req.flash('alertMessage', 'Berhasil Memperbarui Pembayaran')
             req.flash('alertStatus', 'success')
             return res.redirect('/admin/daftar-pembayaran')

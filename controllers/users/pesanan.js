@@ -3,7 +3,7 @@ const {Pembeli_Produk_Pesanan, Pesanan, Produk, Keranjang, Pembayaran} = require
 const {saveImage} = require('../../helper/firebase')
 
 let date = new Date();
-let dateString = date.getDate()  + "-" + (date.getMonth()+1) + "-" + date.getFullYear()
+let dateString = date.getFullYear() + "-" + (date.getMonth()+1) + "-" + date.getDate()
 let login = true
 
 class PesananController {
