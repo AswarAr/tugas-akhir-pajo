@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head -->
+<%- include('../../partials/admin/head.ejs') %>
+<!-- Head -->
+
+<body class="bg-white">
+
+    <%- include('../../partials/admin/navbar.ejs') %>
+
+    <!-- Sidenav -->
+    <%- include('../../partials/admin/sidebar.ejs') %>
+    <!-- Sidenav -->
+
+    <h1 class="font-bold text-3xl text-center my-10">Masukan Jarak</h1>
+    
+    <form action="/admin/input-jarak/<%= pesanan.id %>" method="post">
+        <div class="h-auto px-10 pt-5 mx-auto rounded-lg bg-slate-500 w-96">
+            <h1 class="mb-5 font-bold text-center ">Jarak Dalam KM(Kilo Meter)</h1>
+            <h3 class="font-semibold mt-3 mb-1 text-center">Dari Toko ke <%= pesanan.Pembeli.Alamat %></h3>
+    
+            <h1 class="font-semibold mt-3 mb-1 text-center">Jarak</h1>
+            <input type="text" name="Jarak_Tujuan" class="w-full px-1 py-2 bg-gray-300 rounded" required>
+            <button
+                class="w-20 mx-28 my-5 font-semibold bg-blue-600 rounded h-7 text-cyan-50 hover:bg-blue-700 hover:font-bold"
+                type="submit">Kirim</button>
+        </div>
+    </form>
+
+</body>
+<script src="https://cdn.jsdelivr.net/npm/tw-elements/dist/js/tw-elements.umd.min.js"></script>
+<script src="js/myscript.js"></script>
+
+</html>

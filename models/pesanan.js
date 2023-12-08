@@ -23,6 +23,8 @@ module.exports = (sequelize, DataTypes) => {
     Pembeli_Id: DataTypes.INTEGER,
     Bukti_Pembayaran: DataTypes.STRING,
     Status: DataTypes.STRING,
+    Jarak_Tujuan: DataTypes.INTEGER,
+    Ongkir: DataTypes.INTEGER,
     Total: DataTypes.INTEGER,
     Tanggal: DataTypes.TIME(6),
   }, {

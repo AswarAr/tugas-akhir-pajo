@@ -32,6 +32,14 @@ module.exports = {
         type: Sequelize.DATEONLY,
         defaultValue: DATEONLY
       },
+      Jarak_Tujuan: {
+        type: Sequelize.INTEGER,
+        defaultValue: 0
+      },
+      Ongkir: {
+        type: Sequelize.INTEGER,
+        defaultValue: 0
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

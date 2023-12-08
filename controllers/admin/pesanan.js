@@ -118,6 +118,94 @@ class PesananController {
         }
     } 
 
+    static async viewInputOngkir (req, res) {
+        const {id: userId} = req.session.user
+        const {pesananId} = req.params
+        try {
+            const validatePesanan = await Pesanan.findOne({
+                where: {
+                    id: pesananId,
+                    Pembeli_Id: userId,
+                    Status: 'Menunggu Pembayaran',
+                    Jarak_Tujuan: 0,
+                    Ongkir: 0,
+                },
+                include: [
+                    {model: Pembeli}
+                ],
+            })
+            console.log(validatePesanan.Pembeli.Alamat)
+            if(!validatePesanan) {
+                req.flash('alertMessage', 'Pesanan Tidak Ditemukan atau Ongkir Sudah Dimasukan')
+                req.flash('alertStatus', 'danger')
+                return res.redirect('/keranjang')
+            }
+            const alertMessage = req.flash('alertMessage')
+            const alertStatus = req.flash('alertStatus')
+            const alert = { message: alertMessage, status: alertStatus }
+            return res.render('admin/kelola-toko/input-ongkir', {
+                pesanan: validatePesanan,
+                alert,
+                title: 'Input Ongkir',
+                aktifMenu: 'Input Ongkir',
+            })
+    } catch (err) {
+        console.log(err)
+        req.flash('alertMessage', err.message)
+        req.flash('alertStatus', 'danger')
+        return res.redirect('/')
+    }
+}
+
+    static async inputOngkir (req, res) {
+        const {id: userId} = req.session.user
+        const {pesananId} = req.params
+        const {Jarak_Tujuan} = req.body
+        try {
+            const validatePesanan = await Pesanan.findOne({
+                where: {
+                    id: pesananId,
+                    Pembeli_Id: userId,
+                    Status: 'Menunggu Pembayaran',
+                    Jarak_Tujuan: 0,
+                    Ongkir: 0,
+                }
+            }) 
+            console.log(validatePesanan)
+            if(!validatePesanan) {
+                req.flash('alertMessage', 'Pesanan Tidak Ditemukan atau Ongkir Sudah Dimasukan')
+                req.flash('alertStatus', 'danger')
+                return res.redirect('/admin/kelola-pesanan')
+            }
+            const produkPesanan = await Pembeli_Produk_Pesanan.findAll({
+                where: {
+                    Pesanan_Id: pesananId,
+                    Pembeli_Id: userId,
+                }
+            })
+            let totalKarung = 0
+            for(let i = 0; i < produkPesanan.length; i++) {
+                totalKarung += produkPesanan[i].Jumlah
+            }
+            const payload = {
+                Jarak_Tujuan,
+                Ongkir: (totalKarung * 2000) * Jarak_Tujuan,
+            }
+            await Pesanan.update(payload,{ where: {
+                id: pesananId,
+                Pembeli_Id: userId
+            }})
+            req.flash('alertMessage', 'Ongkir Berhasil Dimasukan')
+            req.flash('alertStatus', 'success')
+            return res.redirect('/admin/kelola-pesanan')
+        }catch (err) {
+            console.log(err)
+            req.flash('alertMessage', err.message)
+            req.flash('alertStatus', 'danger')
+            return res.redirect('/')
+        }
+    }
+
     static async viewPesananProduk (req, res) {
         try {
             const {pesananId} = req.params

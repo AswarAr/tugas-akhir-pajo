@@ -30,6 +30,8 @@ router.get('/hapus-kategori/:kategoriId', authAdmin, Kategori.deleteKategori)
 router.get('/daftar-pesanan', authAdmin, Pesanan.viewPesanan)
 router.get('/daftar-pesanan/:pesananId', authAdmin, Pesanan.viewPesananProduk)
 router.get('/konfirmasi-pesanan/:pesananId', authAdmin, Pesanan.komfirmasiPesanan)
+router.get('/input-jarak/:pesananId', authAdmin, Pesanan.viewInputOngkir)
+router.post('/input-jarak/:pesananId', authAdmin, Pesanan.inputOngkir)
 
 router.get('/daftar-produk', authAdmin, Produk.viewProduct)
 router.get('/tambah-produk', authAdmin, Produk.viewAddProduct)

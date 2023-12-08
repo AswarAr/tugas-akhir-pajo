@@ -109,6 +109,11 @@ class PesananController {
         const {id: userId} = req.session.user
         try {
             const pesanan = await Pesanan.findOne({where: {Pembeli_Id: userId, Status: 'Menunggu Pembayaran'}})
+            if(pesanan.Jarak_Tujuan == 0 || pesanan.Ongkir == 0) {
+                req.flash('alertMessage', 'Silahkan tunggu Admin Memasukan Ongkirnya')
+                req.flash('alertStatus', 'danger')
+                return res.redirect('/pesanan')
+            }
             const pembayaran = await Pembayaran.findAll()
             if(!pesanan){
                 req.flash('alertMessage', 'Pesanan Tidak Ditemukan Silahkan Melakukan Pesanan')
@@ -134,7 +139,7 @@ class PesananController {
             return res.redirect('/')
         }
     }
-
+    
     static async uploadBuktiPembayaran (req, res) {
         const {id: userId} = req.session.user
         const {pesananId} = req.params
