@@ -33,6 +33,9 @@
                                         Total Harga
                                     </th>
                                     <th scope="col" class="border-r dark:border-black">
+                                        Ongkir
+                                    </th>
+                                    <th scope="col" class="border-r dark:border-black">
                                         Total Tagihan
                                     </th>
 
@@ -73,6 +76,14 @@
                                                     RP. <%= pesanan[i].Pembeli_Produk_Pesanans[j].Total %>
                                                 </h3>
                                             </td>
+                                            <% if( j===0 ) { %>
+                                                <td rowspan="<%= pesanan[i].Pembeli_Produk_Pesanans.length %>"
+                                                    class="whitespace-nowrap border-r border-b py-4 max-w-xs dark:border-black">
+                                                    <h3 class="font-bold text-center text-lg">
+                                                        Rp. <%= pesanan[i].Ongkir %>
+                                                    </h3>
+                                                </td>
+                                                <% } %>
                                         <% if( j===0 ) { %>
                                             <td rowspan="<%= pesanan[i].Pembeli_Produk_Pesanans.length %>"
                                                 class="whitespace-nowrap border-r border-b py-4 max-w-xs dark:border-black">

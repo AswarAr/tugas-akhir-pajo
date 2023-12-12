@@ -7,6 +7,10 @@
 
     <%- include('../partials/navbar.ejs') %>
 
+    <% if(alert.message !='' ) { %>
+        <%- include('../partials/alert.ejs') %>
+            <% } %>
+
         <div class="flex flex-col mt-10">
             <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
                 <div class="inline-block min-w-full py-2 sm:px-6 lg:px-8">
@@ -30,7 +34,10 @@
                                         Jumlah
                                     </th>
                                     <th scope="col" class="border-r dark:border-black">
-                                        Total Harga
+                                        Status
+                                    </th>
+                                    <th scope="col" class="border-r dark:border-black">
+                                        Ongkir
                                     </th>
                                     <th scope="col" class="border-r dark:border-black">
                                         Total Tagihan
@@ -74,6 +81,14 @@
                                                 </h3>
                                             </td>
                                             <% } %>
+                                            <% if( j===0 ) { %>
+                                                <td rowspan="<%= pesanan[i].Pembeli_Produk_Pesanans.length %>"
+                                                    class="whitespace-nowrap border-r border-b py-4 max-w-xs dark:border-black">
+                                                    <h3 class="font-bold text-center text-lg">
+                                                        <%= pesanan[i].Ongkir %>
+                                                    </h3>
+                                                </td>
+                                                <% } %>
                                         <% if( j===0 ) { %>
                                             <td rowspan="<%= pesanan[i].Pembeli_Produk_Pesanans.length %>"
                                                 class="whitespace-nowrap border-r border-b py-4 max-w-xs dark:border-black">

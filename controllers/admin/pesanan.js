@@ -134,11 +134,10 @@ class PesananController {
                     {model: Pembeli}
                 ],
             })
-            console.log(validatePesanan.Pembeli.Alamat)
             if(!validatePesanan) {
                 req.flash('alertMessage', 'Pesanan Tidak Ditemukan atau Ongkir Sudah Dimasukan')
                 req.flash('alertStatus', 'danger')
-                return res.redirect('/keranjang')
+                return res.redirect('/admin/daftar-pesanan')
             }
             const alertMessage = req.flash('alertMessage')
             const alertStatus = req.flash('alertStatus')
@@ -153,7 +152,7 @@ class PesananController {
         console.log(err)
         req.flash('alertMessage', err.message)
         req.flash('alertStatus', 'danger')
-        return res.redirect('/')
+        return res.redirect('/admin/daftar-pesanan')
     }
 }
 
@@ -171,7 +170,6 @@ class PesananController {
                     Ongkir: 0,
                 }
             }) 
-            console.log(validatePesanan)
             if(!validatePesanan) {
                 req.flash('alertMessage', 'Pesanan Tidak Ditemukan atau Ongkir Sudah Dimasukan')
                 req.flash('alertStatus', 'danger')
@@ -189,7 +187,8 @@ class PesananController {
             }
             const payload = {
                 Jarak_Tujuan,
-                Ongkir: (totalKarung * 2000) * Jarak_Tujuan,
+                Ongkir: (totalKarung * 10000) * Jarak_Tujuan,
+                Total: (totalKarung * 10000 * Jarak_Tujuan) + validatePesanan.Total
             }
             await Pesanan.update(payload,{ where: {
                 id: pesananId,
@@ -197,12 +196,12 @@ class PesananController {
             }})
             req.flash('alertMessage', 'Ongkir Berhasil Dimasukan')
             req.flash('alertStatus', 'success')
-            return res.redirect('/admin/kelola-pesanan')
+            return res.redirect('/admin/daftar-pesanan')
         }catch (err) {
             console.log(err)
             req.flash('alertMessage', err.message)
             req.flash('alertStatus', 'danger')
-            return res.redirect('/')
+            return res.redirect('/admin/input-ongkir')
         }
     }
 

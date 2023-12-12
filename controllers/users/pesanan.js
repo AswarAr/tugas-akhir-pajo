@@ -16,7 +16,7 @@ class PesananController {
                 include: [
                     {model: Produk}
                 ]})
-                if(!validatekeranjang[0]) return res.redirect('/kategori')
+            if(!validatekeranjang[0]) return res.redirect('/kategori')
             for(let i = 0; i < validatekeranjang.length; i++) {
                     totalPesanan += validatekeranjang[i].Total_Harga
                     const validateJumlahProduk = await Produk.findOne(
@@ -30,12 +30,16 @@ class PesananController {
                         return res.redirect('/keranjang')
                     }
                 }
+                const alertMessage = req.flash('alertMessage')
+                const alertStatus = req.flash('alertStatus')
+                const alert = { message: alertMessage, status: alertStatus }
             if(req.session.user == null | req.session.user == undefined) login = false
             return res.render('user/konfirmasi-pembayaran', {
                 keranjang: validatekeranjang,
                 totalHarga: totalPesanan,
                 title: 'Daftar Pesanan',
                 aktifMenu: 'Konfirmasi Pembayaran',
+                alert,
                 isLogin: login
             })
         } catch (err) {
@@ -109,10 +113,15 @@ class PesananController {
         const {id: userId} = req.session.user
         try {
             const pesanan = await Pesanan.findOne({where: {Pembeli_Id: userId, Status: 'Menunggu Pembayaran'}})
+            if(!pesanan) {
+                req.flash('alertMessage', 'Silahkan Melakukan Pesanan')
+                req.flash('alertStatus', 'danger')
+                return res.redirect('/kategori')
+            }
             if(pesanan.Jarak_Tujuan == 0 || pesanan.Ongkir == 0) {
                 req.flash('alertMessage', 'Silahkan tunggu Admin Memasukan Ongkirnya')
                 req.flash('alertStatus', 'danger')
-                return res.redirect('/pesanan')
+                return res.redirect('/daftar-pesanan')
             }
             const pembayaran = await Pembayaran.findAll()
             if(!pesanan){
@@ -136,7 +145,7 @@ class PesananController {
             console.log(err)
             req.flash('alertMessage', err.message)
             req.flash('alertStatus', 'danger')
-            return res.redirect('/')
+            return res.redirect('/kategori')
         }
     }
     
@@ -216,9 +225,13 @@ class PesananController {
                     model: Pembeli_Produk_Pesanan,
                     include: Produk}
                 ]})
+                const alertMessage = req.flash('alertMessage')
+                const alertStatus = req.flash('alertStatus')
+                const alert = { message: alertMessage, status: alertStatus }
             if(req.session.user == null | req.session.user == undefined) login = false
             return res.render('user/daftar-pesanan', {
             pesanan,
+            alert,
             title: 'Daftar Pesanan',
             aktifMenu: 'Daftar Pesanan',
             isLogin: login
