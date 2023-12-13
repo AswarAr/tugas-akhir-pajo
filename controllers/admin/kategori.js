@@ -1,5 +1,5 @@
 const {Kategori, Produk} = require('../../models')
-const {saveImage} = require('../../helper/firebase')
+const {saveImage, deleteImage} = require('../../helper/firebase')
 class KategoriController {
     static async viewKategori (req, res) {
         try {

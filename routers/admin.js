@@ -23,6 +23,7 @@ router.get('/hapus-pembayaran/:pembayaranId', authAdmin, Pembayaran.actionDelete
 router.get('/daftar-kategori', authAdmin, Kategori.viewKategori)
 router.get('/tambah-kategori', authAdmin, Kategori.viewAddKategori)
 router.get('/perbarui-kategori/:kategoriId', authAdmin, uploadFile, Kategori.viewUpdateKategori)
+router.post('/perbarui-kategori/:kategoriId', authAdmin, uploadFile, Kategori.actiondUpdateKategori)
 router.post('/tambah-kategori',authAdmin, uploadFile, Kategori.actiondAddKategori)
 router.get('/hapus-kategori/:kategoriId', authAdmin, Kategori.deleteKategori)
 
