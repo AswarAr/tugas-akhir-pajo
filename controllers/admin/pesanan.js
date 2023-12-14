@@ -16,7 +16,7 @@ class PesananController {
             console.log(err)
             req.flash('alertMessage', err.message)
             req.flash('alertStatus', 'fail')
-            return res.redirect('/admin/kelola-pesanan')
+            return res.redirect('/admin/daftar-pesanan')
         }
     }
     static async viewPesanan (req, res) {
@@ -41,7 +41,7 @@ class PesananController {
             console.log(err)
             req.flash('alertMessage', err.message)
             req.flash('alertStatus', 'fail')
-            return res.redirect('/admin/kelola-pesanan')
+            return res.redirect('/admin/daftar-pesanan')
         }
     }
 
@@ -109,12 +109,12 @@ class PesananController {
 
             req.flash('alertMessage', 'Pesanan Berhasil Konfirmasi')
             req.flash('alertStatus', 'success')
-            return res.redirect('/admin/kelola-pesanan')
+            return res.redirect('/admin/daftar-pesanan')
         } catch (err) {
             console.log(err)
             req.flash('alertMessage', err.message)
             req.flash('alertStatus', 'fail')
-            return res.redirect('/admin/kelola-pesanan')
+            return res.redirect('/admin/daftar-pesanan')
         }
     } 
 
@@ -125,7 +125,6 @@ class PesananController {
             const validatePesanan = await Pesanan.findOne({
                 where: {
                     id: pesananId,
-                    Pembeli_Id: userId,
                     Status: 'Menunggu Pembayaran',
                     Jarak_Tujuan: 0,
                     Ongkir: 0,
@@ -134,6 +133,7 @@ class PesananController {
                     {model: Pembeli}
                 ],
             })
+            
             if(!validatePesanan) {
                 req.flash('alertMessage', 'Pesanan Tidak Ditemukan atau Ongkir Sudah Dimasukan')
                 req.flash('alertStatus', 'danger')
@@ -152,19 +152,17 @@ class PesananController {
         console.log(err)
         req.flash('alertMessage', err.message)
         req.flash('alertStatus', 'danger')
-        return res.redirect('/admin/daftar-pesanan')
+        return res.redirect(`/admin/input-ongkir/${pesananId}`)
     }
 }
 
     static async inputOngkir (req, res) {
-        const {id: userId} = req.session.user
         const {pesananId} = req.params
         const {Jarak_Tujuan} = req.body
         try {
             const validatePesanan = await Pesanan.findOne({
                 where: {
                     id: pesananId,
-                    Pembeli_Id: userId,
                     Status: 'Menunggu Pembayaran',
                     Jarak_Tujuan: 0,
                     Ongkir: 0,
@@ -173,12 +171,11 @@ class PesananController {
             if(!validatePesanan) {
                 req.flash('alertMessage', 'Pesanan Tidak Ditemukan atau Ongkir Sudah Dimasukan')
                 req.flash('alertStatus', 'danger')
-                return res.redirect('/admin/kelola-pesanan')
+                return res.redirect('/admin/daftar-pesanan')
             }
             const produkPesanan = await Pembeli_Produk_Pesanan.findAll({
                 where: {
                     Pesanan_Id: pesananId,
-                    Pembeli_Id: userId,
                 }
             })
             let totalKarung = 0
@@ -192,7 +189,6 @@ class PesananController {
             }
             await Pesanan.update(payload,{ where: {
                 id: pesananId,
-                Pembeli_Id: userId
             }})
             req.flash('alertMessage', 'Ongkir Berhasil Dimasukan')
             req.flash('alertStatus', 'success')
@@ -201,7 +197,7 @@ class PesananController {
             console.log(err)
             req.flash('alertMessage', err.message)
             req.flash('alertStatus', 'danger')
-            return res.redirect('/admin/input-ongkir')
+            return res.redirect(`/admin/input-ongkir/${pesananId}`)
         }
     }
 
