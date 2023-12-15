@@ -184,8 +184,8 @@ class PesananController {
             }
             const payload = {
                 Jarak_Tujuan,
-                Ongkir: (totalKarung * 10000) * Jarak_Tujuan,
-                Total: (totalKarung * 10000 * Jarak_Tujuan) + validatePesanan.Total
+                Ongkir: (totalKarung * 200) * Jarak_Tujuan,
+                Total: (totalKarung * 200 * Jarak_Tujuan) + validatePesanan.Total
             }
             await Pesanan.update(payload,{ where: {
                 id: pesananId,
