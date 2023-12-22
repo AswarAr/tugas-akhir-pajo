@@ -37,6 +37,9 @@
                                         Status
                                     </th>
                                     <th scope="col" class="border-r dark:border-black">
+                                        Waktu Pembayaran
+                                    </th>
+                                    <th scope="col" class="border-r dark:border-black">
                                         Ongkir
                                     </th>
                                     <th scope="col" class="border-r dark:border-black">
@@ -80,6 +83,18 @@
                                                     <%= pesanan[i].Status %>
                                                 </h3>
                                             </td>
+                                            <% } %>
+                                            <% if( j===0 ) { %>
+                                                <td rowspan="<%= pesanan[i].Pembeli_Produk_Pesanans.length %>"
+                                                    class="whitespace-nowrap border-r border-b py-4 max-w-xs dark:border-black">
+                                                    <h3 class="font-bold text-center text-lg">
+                                                        <% if( !pesanan[i].Waktu_Pembayaran ) { %>
+                                                            <%= pesanan[i].Waktu_Pembayaran %>
+                                                        <% } else {%>
+                                                        <%= pesanan[i].Waktu_Pembayaran.toISOString().slice(0, 10)%>
+                                                        <% } %>
+                                                    </h3>
+                                                </td>
                                             <% } %>
                                             <% if( j===0 ) { %>
                                                 <td rowspan="<%= pesanan[i].Pembeli_Produk_Pesanans.length %>"

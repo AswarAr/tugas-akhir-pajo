@@ -2,8 +2,14 @@ const { Op } = require('sequelize')
 const {Pembeli_Produk_Pesanan, Pesanan, Produk, Keranjang, Pembayaran} = require('../../models')
 const {saveImage} = require('../../helper/firebase')
 
-let date = new Date();
-let dateString = date.getFullYear() + "-" + (date.getMonth()+1) + "-" + date.getDate()
+const currentTime = new Date()
+const year = currentTime.getFullYear()
+const month = currentTime.getMonth() + 1
+const day = currentTime.getDate()
+const hours = currentTime.getHours()
+const minutes = currentTime.getMinutes()
+const expirationTime = new Date(currentTime.getTime() + 24 * 60 * 60 * 1000)
+let dateString = `${year}-${month}-${day}`
 let login = true
 
 class PesananController {
@@ -82,6 +88,8 @@ class PesananController {
                 Total: totalPesanan,
                 Tanggal: dateString,
                 Status: 'Menunggu Pembayaran',
+                Akhir_Pembayaran: expirationTime,
+
             })
             let sisaProduk = 0
             for(let i = 0; i < validatekeranjang.length; i++) { 
@@ -168,6 +176,7 @@ class PesananController {
             const urlGambar = await saveImage(req.files[0])
             const payload = {
                 Bukti_Pembayaran: urlGambar,
+                Waktu_Pembayaran: `${dateString} ${hours}:${minutes}`,
                 Status: 'Menunggu Validasi',
             }
            await Pesanan.update(payload,{ where: {
@@ -218,6 +227,9 @@ class PesananController {
             const pesanan = await Pesanan.findAll({
                 where: {
                     Pembeli_Id: userId,
+                    Status: {
+                        [Op.ne]: 'Pesanan Dibatalkan'
+                    }
                 },
                 order: [['id', 'DESC']],
                 include: [

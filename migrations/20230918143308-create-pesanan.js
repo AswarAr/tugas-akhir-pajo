@@ -32,6 +32,12 @@ module.exports = {
         type: Sequelize.DATEONLY,
         defaultValue: DATEONLY
       },
+      Waktu_Pembayaran: {
+        type: Sequelize.DATE,
+      },
+      Akhir_Pembayaran: {
+        type: Sequelize.DATE
+      },
       Jarak_Tujuan: {
         type: Sequelize.INTEGER,
         defaultValue: 0

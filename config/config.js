@@ -6,6 +6,11 @@ module.exports = {
     "database": process.env.PROD_DB_NAME,
     "host": process.env.PROD_DB_HOSTNAME,
     "dialect": "postgres",
+    /*"username": "postgres",
+    "password": "123",
+    "database": "test-toko-online",
+    "host": "127.0.0.1",
+    "dialect": "postgres"*/
   },
   "test": {
     "username": "root",
